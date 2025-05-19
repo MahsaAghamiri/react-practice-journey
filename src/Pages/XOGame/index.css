@@ -1,0 +1,74 @@
+#xo-game {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(#2c2438, #1f1728);
+  font-size: 1.6rem;
+  color: #fff;
+  position: relative;
+}
+#xo-game .game-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 60rem;
+  min-height: 50rem;
+  padding: 6rem;
+  border-radius: 6px;
+  background: radial-gradient(
+    circle at top,
+    rgba(241, 210, 70, 0.98),
+    rgba(250, 201, 103, 0.87)
+  );
+  color: #744ab3;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+#xo-game .players {
+  display: flex;
+  gap: 2rem;
+}
+#xo-game .players li {
+  flex-basis: 50%;
+}
+#xo-game .players li span {
+  padding: 10px 15px;
+  text-transform: uppercase;
+}
+#xo-game .players button {
+  width: 4rem;
+  border: none;
+  background: none;
+  color: #1f1728;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.5rem 0.25rem 0.25rem 0.25rem;
+  text-align: center;
+}
+#xo-game .players input {
+  font: inherit;
+  font-size: 1.2rem;
+  width: 10rem;
+  border: none;
+  border-radius: 5px;
+  color: #1f1728;
+  padding: 0.6rem;
+  animation: pulse-text 2s infinite;
+  background-color: rgba(241, 210, 70, 0.9);
+  text-align: center;
+  text-transform: uppercase;
+}
+#xo-game .game-board {
+  margin-top: 20px;
+}
+#xo-game .game-board button {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+  font-size: 8rem;
+  color: #2c2438;
+}
+#xo-game .is-active {
+  border: 1px solid #2c2438;
+  padding: 5px 0;
+}
