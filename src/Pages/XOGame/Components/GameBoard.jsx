@@ -1,22 +1,8 @@
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export default function GameBoard({ onSelectSquare, turns }) {
-  console.log(turns, "1th game board");
-  let gameBoard = initialGameBoard;
-
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    console.log(player);
-    gameBoard[row][col] = player;
-  }
+export default function GameBoard({ onSelectSquare, board }) {
+  console.log(board, "1th game board");
 
   function renderGameBoard() {
-    return gameBoard.map((row, rowIndex) => {
+    return board.map((row, rowIndex) => {
       return (
         <li key={rowIndex}>
           <ul className="flex gap-10">
