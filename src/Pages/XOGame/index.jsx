@@ -4,8 +4,13 @@ import Player from "./Components/Player";
 import "./index.css";
 import Log from "./Components/Log";
 import { WINNING_COMBINATION } from "./winnig-combination";
+import GameOver from "./Components/GameOver";
 
-const initialGameBoard = [
+const PLAYERS = {
+  X: "Player 1",
+  O: "Player 2",
+};
+const INITIAL_GAME_BOARD = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
@@ -21,19 +26,8 @@ function deriveActivePlayer(gameTurns) {
   return currentPlayer;
 }
 
-export default function XOGame() {
-  // gameTurns = [
-  //   {square: {
-  //     row: rowIndex,
-  //     col: colIndex,
-  //   },
-  //   player: player
-  //   }
-  // ]
-  const [gameTurns, setGameTurns] = useState([]);
-  const activePlayer = deriveActivePlayer(gameTurns);
-
-  let gameBoard = initialGameBoard;
+function deriveGameBoard(gameTurns) {
+  let gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
 
   for (const turn of gameTurns) {
     const { square, player } = turn;
@@ -41,7 +35,10 @@ export default function XOGame() {
     console.log(player);
     gameBoard[row][col] = player;
   }
+  return gameBoard;
+}
 
+function driveWinner(gameBoard, players) {
   let winner = null;
   for (const combination of WINNING_COMBINATION) {
     const firstSquareSymbol = gameBoard[combination[0].row][combination[0].col];
@@ -54,9 +51,29 @@ export default function XOGame() {
       firstSquareSymbol === secondSquareSymbol &&
       firstSquareSymbol === thirdSquareSymbol
     ) {
-      winner = firstSquareSymbol;
+      winner = players[firstSquareSymbol];
     }
   }
+  return winner;
+}
+export default function XOGame() {
+  // gameTurns = [
+  //   {square: {
+  //     row: rowIndex,
+  //     col: colIndex,
+  //   },
+  //   player: player
+  //   }
+  // ]
+  const [players, setPlayers] = useState(PLAYERS);
+  const [gameTurns, setGameTurns] = useState([]);
+  const activePlayer = deriveActivePlayer(gameTurns);
+
+  const gameBoard = deriveGameBoard(gameTurns);
+
+  const winner = driveWinner(gameBoard, players);
+  let hasDraw = gameTurns.length === 9 && !winner;
+
   function handleSelectSquare(rowIndex, colIndex) {
     setGameTurns((prevTurns) => {
       const currentPlayer = deriveActivePlayer(prevTurns);
@@ -73,22 +90,37 @@ export default function XOGame() {
     });
     console.log(gameTurns, "turns");
   }
+
+  function handleRestart() {
+    setGameTurns([]);
+  }
+
+  function handlePlayerName(symbol, newName) {
+    setPlayers((prevPlayers) => {
+      return { ...prevPlayers, [symbol]: newName };
+    });
+  }
+
   return (
     <div id="xo-game">
       <main className="game-container">
         <ul className="players">
           <Player
-            initialName="player 1"
+            initialName={PLAYERS.X}
             symbol="X"
             isActive={activePlayer === "X"}
+            onChangeName={handlePlayerName}
           />
           <Player
-            initialName="player 2"
+            initialName={PLAYERS.O}
             symbol="O"
             isActive={activePlayer === "O"}
+            onChangeName={handlePlayerName}
           />
         </ul>
-        {winner && <p>You Won {winner}!</p>}
+        {(winner || hasDraw) && (
+          <GameOver winner={winner} onRestart={handleRestart} />
+        )}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </main>
       <Log turns={gameTurns} />
