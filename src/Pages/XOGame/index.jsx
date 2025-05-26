@@ -3,8 +3,10 @@ import GameBoard from "./Components/GameBoard";
 import Player from "./Components/Player";
 import "./index.css";
 import Log from "./Components/Log";
-import { WINNING_COMBINATION } from "./winnig-combination";
 import GameOver from "./Components/GameOver";
+import deriveActivePlayer from "./Utils/deriveActivePlayer";
+import deriveGameBoard from "./Utils/deriveGameBoard";
+import driveWinner from "./Utils/deriveWinner";
 
 const PLAYERS = {
   X: "Player 1",
@@ -16,46 +18,6 @@ const INITIAL_GAME_BOARD = [
   [null, null, null],
 ];
 
-function deriveActivePlayer(gameTurns) {
-  let currentPlayer = "X";
-
-  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
-    currentPlayer = "O";
-  }
-
-  return currentPlayer;
-}
-
-function deriveGameBoard(gameTurns) {
-  let gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
-
-  for (const turn of gameTurns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    console.log(player);
-    gameBoard[row][col] = player;
-  }
-  return gameBoard;
-}
-
-function driveWinner(gameBoard, players) {
-  let winner = null;
-  for (const combination of WINNING_COMBINATION) {
-    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].col];
-    const secondSquareSymbol =
-      gameBoard[combination[1].row][combination[1].col];
-    const thirdSquareSymbol = gameBoard[combination[2].row][combination[2].col];
-
-    if (
-      firstSquareSymbol &&
-      firstSquareSymbol === secondSquareSymbol &&
-      firstSquareSymbol === thirdSquareSymbol
-    ) {
-      winner = players[firstSquareSymbol];
-    }
-  }
-  return winner;
-}
 export default function XOGame() {
   // gameTurns = [
   //   {square: {
@@ -69,7 +31,7 @@ export default function XOGame() {
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  const gameBoard = deriveGameBoard(gameTurns);
+  const gameBoard = deriveGameBoard(gameTurns, INITIAL_GAME_BOARD);
 
   const winner = driveWinner(gameBoard, players);
   let hasDraw = gameTurns.length === 9 && !winner;
@@ -88,7 +50,6 @@ export default function XOGame() {
 
       return updatedTurns;
     });
-    console.log(gameTurns, "turns");
   }
 
   function handleRestart() {
