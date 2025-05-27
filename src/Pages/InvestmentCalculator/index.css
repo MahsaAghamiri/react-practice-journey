@@ -1,0 +1,75 @@
+#investment-calculator {
+  color: #fff;
+  font-size: 2rem;
+}
+
+#investment-calculator #header {
+  text-align: center;
+  margin: 3rem auto;
+}
+
+#investment-calculator #header img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  background-color: transparent;
+}
+
+#investment-calculator #header h1 {
+  font-size: 2rem;
+}
+
+#investment-calculator #user-input {
+  font-size: 1.2rem;
+  padding: 1rem;
+  width: 40%;
+  margin: 2rem auto;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ddc6ed, #ae57ff);
+}
+
+#investment-calculator .input-group {
+  min-width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+}
+
+#investment-calculator #user-input label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#investment-calculator #user-input input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #b9b857;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  color: #e7e9c2;
+  font-size: 1.2rem;
+}
+
+#investment-calculator #result {
+  min-width: 50rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  table-layout: fixed;
+  border-spacing: 1rem;
+  text-align: right;
+}
+
+#investment-calculator #result thead {
+  font-size: 1rem;
+  color: #8c5ffc;
+}
+
+#investment-calculator #result tbody {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1rem;
+  color: #d8d7c1;
+}

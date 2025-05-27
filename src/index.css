@@ -37,3 +37,6 @@ a {
 .gap-10 {
   gap: 10px;
 }
+.center {
+  text-align: center;
+}
