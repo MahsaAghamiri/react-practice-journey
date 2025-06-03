@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import HomePage from "./src/Pages/HomePage/index.jsx";
 import XOGame from "./src/Pages/XOGame/index.jsx";
 import InvestmentCalculator from "./src/Pages/InvestmentCalculator/index.jsx";
+import ProjectManagment from "./src/Pages/ProjectManagment/index.jsx";
 
 export default function Router() {
   return (
@@ -13,6 +14,7 @@ export default function Router() {
           path="/InvestmentCalculator"
           element={<InvestmentCalculator />}
         />
+        <Route path="/ProjectMng" element={<ProjectManagment />} />
       </Routes>
     </BrowserRouter>
   );

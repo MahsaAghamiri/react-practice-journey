@@ -120,3 +120,11 @@
   transform: scale(1.1);
   box-shadow: 0 0 20px rgba(255, 187, 0, 0.8);
 }
+#xo-game button,
+input,
+select,
+optgroup,
+textarea,
+::file-selector-button {
+  background-color: #fff;
+}

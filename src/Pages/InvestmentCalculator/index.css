@@ -1,6 +1,7 @@
 #investment-calculator {
   color: #fff;
   font-size: 2rem;
+  background: linear-gradient(#2c2438, #1f1728);
 }
 
 #investment-calculator #header {
