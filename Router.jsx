@@ -3,6 +3,7 @@ import HomePage from "./src/Pages/HomePage/index.jsx";
 import XOGame from "./src/Pages/XOGame/index.jsx";
 import InvestmentCalculator from "./src/Pages/InvestmentCalculator/index.jsx";
 import ProjectManagment from "./src/Pages/ProjectManagment/index.jsx";
+import QuizApp from "./src/Pages/QuizApp/index.jsx";
 
 export default function Router() {
   return (
@@ -15,6 +16,7 @@ export default function Router() {
           element={<InvestmentCalculator />}
         />
         <Route path="/ProjectMng" element={<ProjectManagment />} />
+        <Route path="/QuizApp" element={<QuizApp />} />
       </Routes>
     </BrowserRouter>
   );
